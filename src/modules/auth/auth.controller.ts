@@ -1,5 +1,18 @@
 import { Request, Response } from 'express';
 import * as AuthService from './auth.service';
+
+// Extend Express Request interface to include 'user'
+declare global {
+    namespace Express {
+        interface User {
+            id: string;
+            // add other user properties if needed
+        }
+        interface Request {
+            user?: User;
+        }
+    }
+}
 import { ResponseManager } from '../../utils/ResponseManager';
 import { LoginDto, RegisterDto } from './auth.dto';
 import { plainToInstance } from 'class-transformer';
@@ -42,7 +55,10 @@ export const login = async (req: Request, res: Response) => {
 
 export const profile = async (req: Request, res: Response) => {
     try {
-        const result = await AuthService.userProfile(req?.user?.id);
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
+        const result = await AuthService.userProfile(req.user.id);
         return ResponseManager.success(res, result, 'Profile retrieved successfully', 200);
     } catch (error: any) {
         return ResponseManager.error(res, error, error.statusCode || 400);

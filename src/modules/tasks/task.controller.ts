@@ -8,6 +8,9 @@ import { CreateTaskDto, UpdateTaskStatusDto } from './task.dto';
 
 export const createTask = async (req: Request, res: Response) => {
     try {
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
         const dto = plainToInstance(CreateTaskDto, req.body, {
             excludeExtraneousValues: true,
         });
@@ -25,6 +28,9 @@ export const createTask = async (req: Request, res: Response) => {
 
 export const updateTask = async (req: Request, res: Response) => {
     try {
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
         const dto = plainToInstance(CreateTaskDto, req.body, {
             excludeExtraneousValues: true,
         });
@@ -43,6 +49,9 @@ export const updateTask = async (req: Request, res: Response) => {
 
 export const getAllTasks = async (req: Request, res: Response) => {
     try {
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
         const { status, dueDate, createdFrom, createdTo } = req.query;
         const userId = req?.user?.id;
         const filters: any = { userId };
@@ -66,6 +75,9 @@ export const getAllTasks = async (req: Request, res: Response) => {
 
 export const getSingleTask = async (req: Request, res: Response) => {
     try {
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
         const result = await TaskService.getSingleTask(req?.params?.taskId, req.user?.id);
         return ResponseManager.success(res, result, 'Task retrieved successfully', 200);
     } catch (error: any) {
@@ -75,7 +87,9 @@ export const getSingleTask = async (req: Request, res: Response) => {
 
 export const deleteTask = async (req: Request, res: Response) => {
     try {
-        
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
         const result = await TaskService.deleteSingleTask(req?.params?.taskId, req.user?.id);
         return ResponseManager.success(res, result, 'Task deleted successfully', 200);
     } catch (error: any) {
@@ -85,6 +99,9 @@ export const deleteTask = async (req: Request, res: Response) => {
 
 export const getTaskMetrics = async (req: Request, res: Response) => {
     try {
+        if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
         const result = await TaskService.getTaskAnalytics(req.user?.id);
         return ResponseManager.success(res, result, 'Task metrics retrieved successfully', 200);
     } catch (error: any) {
@@ -94,6 +111,9 @@ export const getTaskMetrics = async (req: Request, res: Response) => {
 
 export const updateTaskStatus = async (req: Request, res: Response) => {
   try {
+    if (!req.user || !req.user.id) {
+            return ResponseManager.error(res, 'User not authenticated', 401);
+        }
     const dto = plainToInstance(UpdateTaskStatusDto, req.body, {
       excludeExtraneousValues: true,
     });
