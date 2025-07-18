@@ -176,6 +176,7 @@ Be sure to set your environment variables in the dashboard.
 
 - [ ] Pagination and search
 - [ ] Role-based access control (RBAC)
+- [ ] Cron job to remind users of task due dates
 - [ ] Add profile endpoints
 - [ ] Rate limiting
 - [ ] Tests (unit & integration)
