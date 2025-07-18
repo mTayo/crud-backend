@@ -33,7 +33,6 @@ export const loginUser = async (data:  { email: string; password: string } ) => 
         const {password, ...user} = findUser;
         return { user, token };
     } catch (err) {
-        console.error('[Login Error]', err);
         throw err; 
     }
     
