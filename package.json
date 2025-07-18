@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --files --respawn --transpile-only src/server.ts",
     "start": "NODE_ENV=production node dist/server.js",
-    "build": "tsc",
+    "build": "prisma generate && tsc",
     "migrate:deploy": "prisma migrate deploy"
   },
   "keywords": [],

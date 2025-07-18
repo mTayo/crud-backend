@@ -26,6 +26,7 @@ export const authenticate = (
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload & { userId: string };
+    // @ts-ignore
     req.user = decoded;
     next();
   } catch (err) {
