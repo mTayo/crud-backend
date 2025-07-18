@@ -14,9 +14,9 @@ export const registerUser = async (userData: any) => {
       ...userData,
       password: hashedPassword,
     });
-
+    const token = generateToken(createUser.id);
     const {password, ...user} = createUser;
-    return  user;
+    return { user, token };
   } catch (err) {
     console.error('[RegisterUser Error]', err);
     throw err; 
