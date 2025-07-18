@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --files --respawn --transpile-only src/server.ts",
     "start": "NODE_ENV=production node dist/server.js",
@@ -22,7 +21,8 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "@types/node": "^24.0.14"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
