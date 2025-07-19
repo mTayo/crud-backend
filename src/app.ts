@@ -7,7 +7,7 @@ import cors from 'cors';
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
-const allowedOrigins = ['https://someurl.com', 'http://localhost:5173'];
+const allowedOrigins = ['https://crud-frontend-fawn.vercel.app', 'http://localhost:5173'];
 
 app.use(cors({
   origin: function (origin, callback) {
